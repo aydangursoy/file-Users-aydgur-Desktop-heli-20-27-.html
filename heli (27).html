@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HELI — Fine Jewellery</title>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#ffffff;
+  --warm:#ffffff;
+  --gold:#1a1714;
+  --gold-light:#ffffff;
+  --dark:#1a1714;
+  --mid:#6b6560;
+  --border:#e5dfd6;
+  --serif:'Josefin Sans',sans-serif;
+  --sans:'Josefin Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+
+/* ── ANNOUNCEMENT ── */
+.announcement{
+  background:var(--dark);color:#ffffff;
+  text-align:center;padding:10px 16px;
+  font-size:11px;letter-spacing:1.5px;
+  height:36px;
+}
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;background:var(--cream);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:200;
+}
+.nav-links{display:flex;gap:36px;position:static;align-items:center}
+.nav-links a{
+  font-size:11px;letter-spacing:2px;
+  text-decoration:none;color:var(--dark);font-weight:400;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold)}
+
+/* ── SHOP DROPDOWN ── */
+.shop-dropdown-wrap{position:static}
+.shop-dropdown{
+  display:none;
+  position:fixed;left:0;
+  background:#fff;
+  padding:32px 40px 40px;
+  border-right:1px solid var(--border);
+  z-index:290;
+}
+.shop-dropdown.open{display:block;animation:slideIn .25s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+.shop-dropdown a{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;letter-spacing:2px;color:var(--dark);
+  text-decoration:none;padding:13px 0;
+  transition:color .2s;font-family:var(--sans);
+}
+.shop-dropdown a:hover{color:var(--mid)}
+.shop-dropdown .shop-all{
+  font-size:12px;letter-spacing:2px;
+  font-weight:400;margin-bottom:8px;
+}
+.dropdown-arrow{font-size:11px;color:var(--mid)}
+.logo{
+  font-family:var(--serif);font-size:30px;font-weight:300;
+  letter-spacing:10px;text-transform:uppercase;
+  color:var(--dark);text-decoration:none;cursor:pointer;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.nav-right{display:flex;gap:28px;align-items:center}
+.nav-right a{
+  font-size:11px;letter-spacing:2px;
+  text-decoration:none;color:var(--dark);font-weight:400;
+  transition:color .2s;
+}
+.nav-right a:hover{color:var(--gold)}
+.lang-toggle{
+  display:flex;gap:2px;align-items:center;
+  font-size:11px;letter-spacing:1px;
+}
+.lang-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:11px;letter-spacing:1.5px;
+  padding:4px 8px;color:var(--mid);transition:color .2s;
+  font-weight:300;
+}
+.lang-btn.active{color:var(--dark);font-weight:500;border-bottom:1px solid var(--dark)}
+.lang-btn:hover{color:var(--dark)}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeUp .5s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:58vh;
+  display:flex;align-items:center;justify-content:center;
+  background:#000000;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,154,106,.15) 0%,transparent 65%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:pulse 6s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+.hero-grid{display:none}
+.hero-content{position:absolute;bottom:40px;left:0;right:0;z-index:2;text-align:center;padding:0 24px}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;display:block;
+  animation:fadeUp .8s .2s both;
+}
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(18px,2.5vw,32px);
+  font-weight:300;color:#f5ede0;
+  letter-spacing:6px;text-transform:uppercase;
+  line-height:1.1;
+  animation:fadeUp .8s .35s both;
+}
+.hero-title em{font-weight:300;color:var(--gold-light)}
+.hero-sub{
+  font-size:12px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(245,237,224,.4);margin-top:24px;
+  animation:fadeUp .8s .5s both;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-top:48px;padding:14px 36px;
+  border:1px solid rgba(255,255,255,.8);
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:#f5ede0;cursor:pointer;background:none;
+  font-family:var(--sans);font-weight:400;
+  transition:all .3s;
+  animation:fadeUp .8s .65s both;
+}
+.hero-cta:hover{background:#fff;border-color:#fff;color:var(--dark)}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(245,237,224,.3);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+}
+.scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,rgba(184,154,106,.7),transparent);
+  animation:scrollAnim 2s ease-in-out infinite;
+}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── SHOP SECTION ── */
+.shop-section{padding:80px 48px 80px}
+.section-header{text-align:center;margin-bottom:64px}
+.section-tag{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;display:block;
+}
+.section-title{
+  font-family:var(--serif);font-size:clamp(28px,4vw,52px);
+  font-weight:300;letter-spacing:3px;text-transform:uppercase;
+}
+.section-line{display:none}
+
+/* ── CATEGORY GRID ── */
+.cat-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
+  background:var(--border);
+}
+.cat-card{
+  position:relative;aspect-ratio:3/4;overflow:hidden;
+  cursor:pointer;background:var(--warm);
+}
+.cat-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.cat-card:hover .cat-inner{transform:scale(1.05)}
+.cat-visual{
+  width:100%;height:100%;
+  background:var(--cream);
+}
+/* Category-specific backgrounds */
+.cat-card[data-cat="earrings"] .cat-visual{background:var(--cream)}
+.cat-card[data-cat="bracelets"] .cat-visual{background:var(--cream)}
+.cat-card[data-cat="necklaces"] .cat-visual{background:var(--cream)}
+.cat-card[data-cat="rings"] .cat-visual{background:var(--cream)}
+
+.cat-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,23,20,.75) 0%,rgba(26,23,20,.1) 55%,transparent 100%);
+  transition:background .4s;
+}
+.cat-card:hover .cat-overlay{background:linear-gradient(to top,rgba(26,23,20,.85) 0%,rgba(26,23,20,.25) 60%,rgba(26,23,20,.05) 100%)}
+.cat-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:36px 28px 32px;text-align:center;
+}
+.cat-name{
+  font-family:var(--sans);font-size:11px;letter-spacing:4px;
+  text-transform:uppercase;color:#f5ede0;font-weight:400;
+  display:block;margin-bottom:4px;
+}
+.cat-name-tr{
+  font-family:var(--serif);font-size:14px;
+  color:rgba(245,237,224,.55);display:block;margin-bottom:12px;
+  font-weight:300;
+}
+.cat-bar{display:none}
+
+/* ── SUBSCRIBE ── */
+.subscribe-section{
+  background:#fff;padding:36px 0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.subscribe-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:0;
+}
+.sub-deco{
+  flex-shrink:0;
+  display:flex;align-items:center;
+  line-height:0;
+}
+.subscribe-content{
+  flex:1;text-align:center;padding:0 40px;
+}
+.sub-title{
+  font-family:var(--sans);font-size:14px;font-weight:400;
+  letter-spacing:3px;color:var(--dark);margin-bottom:8px;
+}
+.sub-desc{
+  font-size:11px;color:var(--mid);letter-spacing:2px;
+  margin-bottom:20px;
+}
+.subscribe-form{
+  display:flex;justify-content:center;gap:0;max-width:300px;margin:0 auto;
+}
+.subscribe-input{
+  width:100%;padding:10px 16px;background:#fff;
+  border:1px solid var(--dark);
+  font-family:var(--sans);font-size:11px;letter-spacing:2px;
+  color:var(--dark);outline:none;text-align:center;
+  transition:border-color .3s;
+}
+.subscribe-input::placeholder{color:var(--mid);letter-spacing:2px}
+.subscribe-input:focus{border-color:var(--dark)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--cream);padding:60px 48px 32px;
+  border-top:1px solid var(--border);
+}
+.footer-top{
+  display:flex;
+  gap:0;margin-bottom:60px;
+  padding:0;
+  align-items:flex-start;
+}
+.footer-col{
+  width:180px;
+  flex-shrink:0;
+  padding:0 4px;
+}
+.footer-col:first-child{
+  padding-left:0;
+}
+.footer-col-brand{
+  flex:1;
+  padding:0 0 0 16px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+}
+.footer-brand-text{
+  font-family:var(--serif);font-size:14px;color:var(--mid);
+  line-height:1.8;
+  width:25%;
+  min-width:220px;
+}
+.footer-col-title{
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--dark);margin-bottom:20px;font-weight:700;
+}
+.footer-col a{
+  display:block;font-size:12px;color:var(--mid);
+  text-decoration:none;letter-spacing:.5px;margin-bottom:10px;
+  transition:color .2s;
+}
+.footer-col a:hover{color:var(--dark)}
+.footer-bottom{
+  border-top:1px solid var(--border);
+  padding:28px 0 0;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-copy{font-size:11px;color:var(--mid);letter-spacing:1px}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{
+  font-size:11px;color:var(--mid);
+  text-decoration:none;letter-spacing:1px;transition:color .2s;
+}
+.footer-legal a:hover{color:var(--dark)}
+.payment-icons{display:flex;gap:8px;align-items:center}
+.pay-icon{
+  padding:4px 8px;border:1px solid var(--border);
+  border-radius:3px;font-size:10px;color:var(--mid);
+  letter-spacing:1px;
+}
+
+/* ── DISCOVER PAGE ── */
+.discover-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:80vh;
+  border-bottom:1px solid var(--border);
+}
+.discover-visual{
+  background:var(--cream);
+  min-height:70vh;
+}
+.discover-text{
+  padding:80px 60px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid var(--border);
+}
+.discover-prod-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
+  background:var(--border);
+  border-bottom:1px solid var(--border);
+}
+.discover-prod-row .cat-card{aspect-ratio:3/4}
+.discover-tag{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--mid);margin-bottom:24px;display:block;
+}
+.discover-title{
+  font-family:var(--serif);font-size:clamp(28px,3vw,44px);
+  font-weight:300;letter-spacing:3px;text-transform:uppercase;
+  line-height:1.2;margin-bottom:24px;
+}
+.discover-desc{
+  font-size:13px;color:var(--mid);line-height:1.9;
+  letter-spacing:.5px;margin-bottom:40px;max-width:380px;
+}
+.discover-products{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  margin-top:8px;
+}
+.discover-prod{
+  cursor:pointer;
+}
+.discover-prod-img{
+  aspect-ratio:1/1;background:var(--cream);
+  margin-bottom:10px;overflow:hidden;
+}
+.discover-prod-img div{
+  width:100%;height:100%;background:var(--cream);
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.discover-prod:hover .discover-prod-img div{transform:scale(1.04)}
+.discover-prod-name{font-size:11px;letter-spacing:2px;color:var(--dark);margin-bottom:3px;}
+.discover-prod-material{font-size:10px;color:var(--mid);letter-spacing:1px;}
+.discover-buy{
+  display:inline-block;margin-top:28px;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--dark);text-decoration:none;
+  border-bottom:1px solid var(--dark);padding-bottom:2px;
+  transition:color .2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+  font-family:var(--sans);
+}
+.discover-buy:hover{color:var(--mid);border-bottom-color:var(--mid)}
+
+@media(max-width:900px){
+  .discover-section{grid-template-columns:1fr}
+  .discover-text{padding:40px 24px;border-left:none;border-top:1px solid var(--border)}
+}
+/* ── SEARCH BAR ── */
+.search-bar{
+  display:none;
+  position:fixed;top:0;
+  left:0;right:0;
+  z-index:500;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  align-items:center;justify-content:center;
+  padding:16px 48px;
+  gap:16px;
+}
+.search-bar.open{display:flex}
+.search-overlay{display:none}
+.search-input{
+  width:340px;
+  border:none;outline:none;
+  border-bottom:1px solid var(--dark);
+  font-family:var(--sans);font-size:12px;
+  letter-spacing:2px;color:var(--dark);
+  background:transparent;padding:6px 0;
+}
+.search-input::placeholder{color:var(--mid)}
+.search-close{
+  background:none;border:none;cursor:pointer;
+  font-size:20px;color:var(--mid);padding:0;
+  line-height:1;transition:color .2s;font-weight:200;
+}
+.search-close:hover{color:var(--dark)}
+/* ── LOGIN PAGE ── */
+.login-page{min-height:80vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;}
+.login-box{width:100%;max-width:400px;}
+.login-title{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:300;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;}
+.login-subtitle{font-size:11px;color:var(--mid);letter-spacing:1.5px;margin-bottom:40px;line-height:1.8;}
+.login-field{margin-bottom:24px;}
+.login-label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:8px;}
+.login-input{width:100%;padding:12px 0;border:none;border-bottom:1px solid var(--border);font-family:var(--sans);font-size:12px;letter-spacing:1px;color:var(--dark);background:transparent;outline:none;transition:border-color .2s;}
+.login-input:focus{border-bottom-color:var(--dark);}
+.login-input::placeholder{color:var(--border)}
+.login-forgot{display:block;text-align:right;font-size:10px;letter-spacing:1.5px;color:var(--mid);text-decoration:none;margin-top:8px;transition:color .2s;}
+.login-forgot:hover{color:var(--dark)}
+.login-btn{width:100%;padding:16px;margin-top:32px;background:var(--dark);color:#fff;border:none;font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:opacity .2s;}
+.login-btn:hover{opacity:.8}
+.login-divider{text-align:center;margin:32px 0;font-size:10px;letter-spacing:2px;color:var(--mid);position:relative;}
+.login-divider::before,.login-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--border);}
+.login-divider::before{left:0}.login-divider::after{right:0}
+.login-register-btn{width:100%;padding:16px;background:transparent;color:var(--dark);border:1px solid var(--dark);font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.login-register-btn:hover{background:var(--dark);color:#fff}
+
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:400;}
+.cart-overlay.open{display:block}
+.cart-drawer{position:fixed;top:0;right:-420px;bottom:0;width:420px;max-width:100vw;background:#fff;z-index:401;display:flex;flex-direction:column;transition:right .35s cubic-bezier(.4,0,.2,1);}
+.cart-drawer.open{right:0}
+.cart-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:24px 32px;border-bottom:1px solid var(--border);}
+.cart-drawer-title{font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dark);font-weight:500;}
+.cart-close{background:none;border:none;cursor:pointer;color:var(--mid);font-size:22px;padding:0;line-height:1;transition:color .2s;font-weight:200;}
+.cart-close:hover{color:var(--dark)}
+.cart-body{flex:1;overflow-y:auto;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.cart-empty{text-align:center}
+.cart-empty-title{font-size:12px;letter-spacing:2px;color:var(--dark);text-transform:uppercase;margin-bottom:8px;}
+.cart-empty-desc{font-size:11px;color:var(--mid);letter-spacing:1px;margin-bottom:32px;line-height:1.8;}
+.cart-shop-btn{display:inline-block;padding:13px 32px;border:1px solid var(--dark);font-family:var(--sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dark);cursor:pointer;background:none;transition:all .3s;}
+.cart-shop-btn:hover{background:var(--dark);color:#fff}
+.cart-footer{padding:24px 32px;border-top:1px solid var(--border);}
+.cart-subtotal{display:flex;justify-content:space-between;font-size:11px;letter-spacing:1.5px;color:var(--dark);margin-bottom:16px;text-transform:uppercase;}
+.cart-checkout{width:100%;padding:16px;background:var(--dark);color:#fff;border:none;font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:opacity .2s;}
+.cart-checkout:hover{opacity:.8}
+
+/* ── CATEGORY DETAIL PAGE ── */
+.cat-detail{padding:80px 48px}
+.cat-detail-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:64px;padding-bottom:32px;
+  border-bottom:1px solid var(--border);
+}
+.cat-detail-title{
+  font-family:var(--serif);font-size:clamp(40px,6vw,80px);
+  font-weight:300;letter-spacing:4px;text-transform:uppercase;
+  line-height:1;
+}
+.cat-detail-title span{
+  display:block;font-size:.45em;
+  color:var(--mid);letter-spacing:3px;margin-bottom:8px;
+}
+.btn-back{
+  display:flex;align-items:center;gap:12px;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--mid);
+  transition:color .2s;padding:0;
+}
+.btn-back:hover{color:var(--dark)}
+.btn-back svg{transition:transform .2s}
+.btn-back:hover svg{transform:translateX(-4px)}
+
+.products-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:48px 32px;
+}
+.prod-card{cursor:pointer}
+.prod-img{
+  aspect-ratio:3/4;overflow:hidden;margin-bottom:18px;
+  position:relative;
+}
+.prod-visual{
+  width:100%;height:100%;
+  background:var(--cream);
+  transition:transform .7s cubic-bezier(.25,.46,.45,.94);
+}
+.prod-card:hover .prod-visual{transform:scale(1.04)}
+.prod-tag{
+  position:absolute;top:16px;left:16px;
+  background:var(--dark);color:var(--gold-light);
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 10px;
+}
+.prod-info{padding:0 4px}
+.prod-name{
+  font-family:var(--serif);font-size:20px;font-weight:400;
+  letter-spacing:1px;margin-bottom:6px;
+}
+.prod-material{font-size:11px;color:var(--mid);letter-spacing:1px;margin-bottom:10px}
+.prod-price{font-size:14px;letter-spacing:1.5px;color:var(--dark);font-weight:400}
+.prod-add{
+  display:flex;align-items:center;gap:8px;
+  margin-top:14px;width:100%;padding:12px;
+  background:none;border:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--dark);cursor:pointer;
+  transition:all .3s;justify-content:center;font-weight:400;
+}
+.prod-add:hover{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .shop-section,.cat-detail{padding:60px 24px}
+}
+@media(max-width:600px){
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:24px 16px}
+  .subscribe-form{flex-direction:column}
+  .subscribe-input{border-right:1px solid rgba(184,154,106,.4);border-bottom:none}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement"></div>
+
+
+<!-- SEARCH BAR -->
+<div class="search-overlay" id="search-overlay"></div>
+<div class="search-bar" id="search-bar">
+  <input class="search-input tr-text" type="text" placeholder="Ara...">
+  <input class="search-input en-text" type="text" placeholder="Search..." style="display:none">
+  <button class="search-close" onclick="toggleSearch()">×</button>
+</div>
+
+<!-- ════════════ HOME PAGE ════════════ -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <span class="cart-drawer-title tr-text">Sepetim</span>
+    <span class="cart-drawer-title en-text" style="display:none">Shopping Bag</span>
+    <button class="cart-close" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-body">
+    <div class="cart-empty">
+      <div class="cart-empty-title tr-text">Sepetiniz boş</div>
+      <div class="cart-empty-title en-text" style="display:none">Your bag is empty</div>
+      <div class="cart-empty-desc tr-text">Henüz sepetinize ürün eklemediniz.</div>
+      <div class="cart-empty-desc en-text" style="display:none">You haven't added any items to your bag yet.</div>
+      <button class="cart-shop-btn tr-text" onclick="toggleCart();showHome()">Alışverişe Başla</button>
+      <button class="cart-shop-btn en-text" style="display:none" onclick="toggleCart();showHome()">Continue Shopping</button>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span class="tr-text">Toplam</span>
+      <span class="en-text" style="display:none">Subtotal</span>
+      <span>₺0</span>
+    </div>
+    <button class="cart-checkout tr-text">Ödemeye Geç</button>
+    <button class="cart-checkout en-text" style="display:none">Checkout</button>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <div class="shop-dropdown-wrap">
+      <a href="#" onclick="toggleShopDropdown();return false" class="tr-text">Alışveriş</a>
+      <a href="#" onclick="toggleShopDropdown();return false" class="en-text" style="display:none">Shop</a>
+      <div class="shop-dropdown" id="shop-dropdown">
+        <a href="#" onclick="showHome();closeDropdown();return false" class="tr-text shop-all">Tümünü Gör</a>
+        <a href="#" onclick="showHome();closeDropdown();return false" class="en-text shop-all" style="display:none">Shop All</a>
+        <a href="#" onclick="openCategory('rings');closeDropdown();return false">
+          <span class="tr-text">Yüzük</span><span class="en-text" style="display:none">Rings</span>
+          <span class="dropdown-arrow">∨</span>
+        </a>
+        <a href="#" onclick="openCategory('earrings');closeDropdown();return false">
+          <span class="tr-text">Küpe</span><span class="en-text" style="display:none">Earrings</span>
+          <span class="dropdown-arrow">∨</span>
+        </a>
+        <a href="#" onclick="openCategory('necklaces');closeDropdown();return false">
+          <span class="tr-text">Kolye</span><span class="en-text" style="display:none">Necklaces</span>
+          <span class="dropdown-arrow">∨</span>
+        </a>
+        <a href="#" onclick="openCategory('bracelets');closeDropdown();return false">
+          <span class="tr-text">Bileklik</span><span class="en-text" style="display:none">Bracelets</span>
+          <span class="dropdown-arrow">∨</span>
+        </a>
+      </div>
+    </div>
+    <a href="#" onclick="showBestseller();return false" class="tr-text">Çok Satanlar</a>
+    <a href="#" onclick="showBestseller();return false" class="en-text" style="display:none">Bestseller</a>
+    <a href="#" onclick="showDiscover();return false" class="tr-text">Keşfet</a>
+    <a href="#" onclick="showDiscover();return false" class="en-text" style="display:none">Discover</a>
+  </div>
+  <a class="logo" onclick="showHome();return false" href="#">HELI</a>
+  <div class="nav-right">
+    <a href="#" onclick="toggleCart();return false" class="tr-text">Sepet (0)</a>
+    <a href="#" onclick="toggleCart();return false" class="en-text" style="display:none">Shopping Bag (0)</a>
+    <a href="#" onclick="toggleSearch();return false" class="tr-text">Ara</a>
+    <a href="#" onclick="toggleSearch();return false" class="en-text" style="display:none">Search</a>
+    <a href="#" onclick="showLogin();return false" class="tr-text">Giriş</a>
+    <a href="#" onclick="showLogin();return false" class="en-text" style="display:none">Login</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('tr')">TR</button>
+      <span style="color:var(--border)">|</span>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- SEARCH BAR -->
+<div class="search-bar" id="search-bar">
+  <input class="search-input tr-text" type="text" placeholder="Ara...">
+  <input class="search-input en-text" type="text" placeholder="Search..." style="display:none">
+  <button class="search-close" onclick="toggleSearch()">×</button>
+</div>
+
+<!-- ════════════ HOME PAGE ════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" onclick="openCategory('earrings')" style="cursor:pointer">THE MALLORCA EARRINGS</h1>
+      <p class="hero-sub tr-text">Yeni Koleksiyon</p>
+      <p class="hero-sub en-text" style="display:none">New Collection</p>
+    </div>
+
+  </section>
+
+  <!-- SHOP CATEGORIES -->
+  <section class="shop-section">
+    <div class="cat-grid">
+      <div class="cat-card" data-cat="rings" onclick="openCategory('rings')">
+        <div class="cat-inner">
+          <div class="cat-visual"></div>
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <span class="cat-name en-text" style="display:none">Rings</span>
+            <span class="cat-name tr-text">YÜZÜK</span>
+            <div class="cat-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cat-card" data-cat="necklaces" onclick="openCategory('necklaces')">
+        <div class="cat-inner">
+          <div class="cat-visual"></div>
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <span class="cat-name en-text" style="display:none">Necklaces</span>
+            <span class="cat-name tr-text">KOLYE</span>
+            <div class="cat-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cat-card" data-cat="bracelets" onclick="openCategory('bracelets')">
+        <div class="cat-inner">
+          <div class="cat-visual"></div>
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <span class="cat-name en-text" style="display:none">Bracelets</span>
+            <span class="cat-name tr-text">BİLEKLİK</span>
+            <div class="cat-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cat-card" data-cat="earrings" onclick="openCategory('earrings')">
+        <div class="cat-inner">
+          <div class="cat-visual"></div>
+          <div class="cat-overlay"></div>
+          <div class="cat-info">
+            <span class="cat-name en-text" style="display:none">Earrings</span>
+            <span class="cat-name tr-text">KÜPE</span>
+            <div class="cat-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe-section">
+    <div class="subscribe-inner">
+      <div class="sub-deco sub-deco-left">
+        <svg width="140" height="160" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+          <rect x="0" y="0" width="100" height="28" fill="var(--dark)"/>
+          <rect x="0" y="92" width="100" height="28" fill="var(--dark)"/>
+          <rect x="35" y="0" width="30" height="120" fill="var(--dark)"/>
+        </svg>
+      </div>
+      <div class="subscribe-content">
+        <h2 class="sub-title tr-text">E-postalarımıza Abone Olun</h2>
+        <h2 class="sub-title en-text" style="display:none">Subscribe to our emails</h2>
+        <p class="sub-desc tr-text">Yeni koleksiyonlar ve özel tekliflerden ilk siz haberdar olun.</p>
+        <p class="sub-desc en-text" style="display:none">Be the first to know about new collections and exclusive offers.</p>
+        <div class="subscribe-form">
+          <input class="subscribe-input tr-text" type="email" placeholder="E-posta">
+          <input class="subscribe-input en-text" type="email" placeholder="Email" style="display:none">
+        </div>
+      </div>
+      <div class="sub-deco sub-deco-right">
+        <svg width="140" height="160" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+          <rect x="0" y="0" width="100" height="28" fill="var(--dark)"/>
+          <rect x="0" y="92" width="100" height="28" fill="var(--dark)"/>
+          <rect x="35" y="0" width="30" height="120" fill="var(--dark)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="footer-col-title tr-text">Hakkımızda</div>
+        <div class="footer-col-title en-text" style="display:none">About</div>
+        <a href="#" class="tr-text">Biz Kimiz</a>
+        <a href="#" class="en-text" style="display:none">Who We Are</a>
+        <a href="#" class="tr-text">Sürdürülebilirlik</a>
+        <a href="#" class="en-text" style="display:none">Sustainability</a>
+        <a href="#" class="tr-text">Malzeme Bakımı</a>
+        <a href="#" class="en-text" style="display:none">Materials Care</a>
+        <a href="#" class="tr-text">Sosyal Medya</a>
+        <a href="#" class="en-text" style="display:none">Social Media</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title tr-text">Bilgi</div>
+        <div class="footer-col-title en-text" style="display:none">Information</div>
+        <a href="#" class="tr-text">İletişim</a>
+        <a href="#" class="en-text" style="display:none">Contact</a>
+        <a href="#" class="tr-text">Kargo</a>
+        <a href="#" class="en-text" style="display:none">Shipping</a>
+        <a href="#" class="tr-text">İadeler</a>
+        <a href="#" class="en-text" style="display:none">Returns</a>
+        <a href="#" class="tr-text">Garanti</a>
+        <a href="#" class="en-text" style="display:none">Warranty</a>
+        <a href="#" class="tr-text">SSS</a>
+        <a href="#" class="en-text" style="display:none">FAQ</a>
+      </div>
+      <div class="footer-col-brand">
+        <p class="footer-brand-text">Each piece is conceptualized and designed in our Istanbul studio, featuring sculpted surfaces, and evolving forms. Our designs are shaped by the intersection of architectural thinking and art, exploring the relationship between form and light.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 HELI. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#" class="tr-text">Şartlar ve Koşullar</a>
+        <a href="#" class="en-text" style="display:none">Terms & Conditions</a>
+        <a href="#" class="tr-text">Gizlilik Politikası</a>
+        <a href="#" class="en-text" style="display:none">Privacy Policy</a>
+        <a href="#" class="tr-text">Çerez Politikası</a>
+        <a href="#" class="en-text" style="display:none">Cookie Policy</a>
+      </div>
+      <div class="payment-icons">
+        <div class="pay-icon">VISA</div>
+        <div class="pay-icon">MC</div>
+        <div class="pay-icon">AMEX</div>
+        <div class="pay-icon">TROY</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════ DISCOVER PAGE ════════════ -->
+<div class="page" id="page-discover">
+  <div class="cat-detail" style="padding-bottom:0">
+    <div class="cat-detail-header">
+      <div class="cat-detail-title">
+        <span class="tr-text">KEŞFET</span>
+        <span class="en-text" style="display:none">DISCOVER</span>
+      </div>
+      <button class="btn-back" onclick="showHome()">
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5H18M0 5L5 1M0 5L5 9" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <span class="tr-text">Geri</span>
+        <span class="en-text" style="display:none">Back</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- BLOCK 1 -->
+  <div class="discover-section">
+    <div class="discover-visual"></div>
+    <div class="discover-text">
+      <span class="discover-tag tr-text">Yeni Koleksiyon</span>
+      <span class="discover-tag en-text" style="display:none">New Collection</span>
+      <h2 class="discover-title tr-text">Mallorca Küpeler</h2>
+      <h2 class="discover-title en-text" style="display:none">The Mallorca Earrings</h2>
+      <p class="discover-desc tr-text">Mimari düşünce ile sanatın kesişiminden ilham alan Mallorca Küpeler, ışığı yüzeylerde heykelsi bir zarafetle yansıtır.</p>
+      <p class="discover-desc en-text" style="display:none">Inspired by the intersection of architectural thinking and art, the Mallorca Earrings reflect light across sculpted surfaces with effortless elegance.</p>
+      <div class="discover-products">
+        <div class="discover-prod" onclick="openCategory('earrings')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Mallorca Küpe</div>
+          <div class="discover-prod-name en-text" style="display:none">Mallorca Earrings</div>
+          <div class="discover-prod-material">18k Gold</div>
+        </div>
+        <div class="discover-prod" onclick="openCategory('earrings')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Kemer Küpe</div>
+          <div class="discover-prod-name en-text" style="display:none">Arch Earrings</div>
+          <div class="discover-prod-material">18k Rose Gold</div>
+        </div>
+      </div>
+      <button class="discover-buy tr-text" onclick="openCategory('earrings')">Tümünü Gör</button>
+      <button class="discover-buy en-text" style="display:none" onclick="openCategory('earrings')">Shop All</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 1 PRODUCTS -->
+  <div class="discover-prod-row">
+    <div class="cat-card" onclick="openCategory('earrings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('earrings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('earrings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('earrings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+  </div>
+
+  <!-- BLOCK 2 -->
+  <div class="discover-section" style="direction:rtl">
+    <div class="discover-visual" style="background:var(--cream)"></div>
+    <div class="discover-text" style="direction:ltr;border-left:none;border-right:1px solid var(--border)">
+      <span class="discover-tag tr-text">Çok Satanlar</span>
+      <span class="discover-tag en-text" style="display:none">Bestsellers</span>
+      <h2 class="discover-title tr-text">Mimari Yüzükler</h2>
+      <h2 class="discover-title en-text" style="display:none">Architectural Rings</h2>
+      <p class="discover-desc tr-text">Form ve ışık arasındaki ilişkiyi keşfeden yüzük koleksiyonumuz, her parçayı benzersiz bir heykel eserine dönüştürür.</p>
+      <p class="discover-desc en-text" style="display:none">Our ring collection explores the relationship between form and light, transforming each piece into a unique sculptural work.</p>
+      <div class="discover-products">
+        <div class="discover-prod" onclick="openCategory('rings')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Helix Yüzük</div>
+          <div class="discover-prod-name en-text" style="display:none">Helix Ring</div>
+          <div class="discover-prod-material">18k Rose Gold</div>
+        </div>
+        <div class="discover-prod" onclick="openCategory('rings')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Tutulma Yüzük</div>
+          <div class="discover-prod-name en-text" style="display:none">Eclipse Ring</div>
+          <div class="discover-prod-material">18k Gold</div>
+        </div>
+      </div>
+      <button class="discover-buy tr-text" onclick="openCategory('rings')">Tümünü Gör</button>
+      <button class="discover-buy en-text" style="display:none" onclick="openCategory('rings')">Shop All</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 2 PRODUCTS -->
+  <div class="discover-prod-row">
+    <div class="cat-card" onclick="openCategory('rings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('rings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('rings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('rings')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+  </div>
+
+  <!-- BLOCK 3 -->
+  <div class="discover-section">
+    <div class="discover-visual"></div>
+    <div class="discover-text">
+      <span class="discover-tag tr-text">Öne Çıkanlar</span>
+      <span class="discover-tag en-text" style="display:none">Featured</span>
+      <h2 class="discover-title tr-text">İstanbul Stüdyosu</h2>
+      <h2 class="discover-title en-text" style="display:none">Istanbul Studio</h2>
+      <p class="discover-desc tr-text">Her parça, İstanbul stüdyomuzda kavramsallaştırılır ve tasarlanır. Heykelsi yüzeyler ve gelişen formlarla şekillenen mücevherler, mimari düşünce ile sanatın buluşma noktasından doğar.</p>
+      <p class="discover-desc en-text" style="display:none">Each piece is conceptualized and designed in our Istanbul studio. Jewellery shaped by sculpted surfaces and evolving forms, born at the intersection of architectural thinking and art.</p>
+      <div class="discover-products">
+        <div class="discover-prod" onclick="openCategory('necklaces')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Orbit Kolye</div>
+          <div class="discover-prod-name en-text" style="display:none">Orbit Necklace</div>
+          <div class="discover-prod-material">18k Gold</div>
+        </div>
+        <div class="discover-prod" onclick="openCategory('bracelets')">
+          <div class="discover-prod-img"><div></div></div>
+          <div class="discover-prod-name tr-text">Mallorca Bileklik</div>
+          <div class="discover-prod-name en-text" style="display:none">Mallorca Bracelet</div>
+          <div class="discover-prod-material">18k Gold</div>
+        </div>
+      </div>
+      <button class="discover-buy tr-text" onclick="showBestseller()">Çok Satanları Keşfet</button>
+      <button class="discover-buy en-text" style="display:none" onclick="showBestseller()">Explore Bestsellers</button>
+    </div>
+  </div>
+
+  <!-- BLOCK 3 PRODUCTS -->
+  <div class="discover-prod-row">
+    <div class="cat-card" onclick="openCategory('necklaces')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('bracelets')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('necklaces')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+    <div class="cat-card" onclick="openCategory('bracelets')"><div class="cat-inner"><div class="cat-visual"></div></div></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="footer-col-title tr-text">Hakkımızda</div>
+        <div class="footer-col-title en-text" style="display:none">About</div>
+        <a href="#" class="tr-text">Biz Kimiz</a><a href="#" class="en-text" style="display:none">Who We Are</a>
+        <a href="#" class="tr-text">Sürdürülebilirlik</a><a href="#" class="en-text" style="display:none">Sustainability</a>
+        <a href="#" class="tr-text">Malzeme Bakımı</a><a href="#" class="en-text" style="display:none">Materials Care</a>
+        <a href="#" class="tr-text">Sosyal Medya</a><a href="#" class="en-text" style="display:none">Social Media</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title tr-text">Bilgi</div>
+        <div class="footer-col-title en-text" style="display:none">Information</div>
+        <a href="#" class="tr-text">İletişim</a><a href="#" class="en-text" style="display:none">Contact</a>
+        <a href="#" class="tr-text">Kargo</a><a href="#" class="en-text" style="display:none">Shipping</a>
+        <a href="#" class="tr-text">İadeler</a><a href="#" class="en-text" style="display:none">Returns</a>
+        <a href="#" class="tr-text">Garanti</a><a href="#" class="en-text" style="display:none">Warranty</a>
+        <a href="#" class="tr-text">SSS</a><a href="#" class="en-text" style="display:none">FAQ</a>
+      </div>
+      <div class="footer-col-brand">
+        <p class="footer-brand-text">Each piece is conceptualized and designed in our Istanbul studio, featuring sculpted surfaces, and evolving forms. Our designs are shaped by the intersection of architectural thinking and art, exploring the relationship between form and light.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 HELI. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#" class="tr-text">Şartlar ve Koşullar</a><a href="#" class="en-text" style="display:none">Terms & Conditions</a>
+        <a href="#" class="tr-text">Gizlilik Politikası</a><a href="#" class="en-text" style="display:none">Privacy Policy</a>
+        <a href="#" class="tr-text">Çerez Politikası</a><a href="#" class="en-text" style="display:none">Cookie Policy</a>
+      </div>
+      <div class="payment-icons">
+        <div class="pay-icon">VISA</div><div class="pay-icon">MC</div>
+        <div class="pay-icon">AMEX</div><div class="pay-icon">TROY</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════ LOGIN PAGE ════════════ -->
+<div class="page" id="page-login">
+  <div class="login-page">
+    <div class="login-box">
+      <h2 class="login-title tr-text">Giriş Yap</h2>
+      <h2 class="login-title en-text" style="display:none">Login</h2>
+      <p class="login-subtitle tr-text">Hesabınıza giriş yapın.</p>
+      <p class="login-subtitle en-text" style="display:none">Sign in to your account.</p>
+
+      <div class="login-field">
+        <label class="login-label tr-text">E-posta</label>
+        <label class="login-label en-text" style="display:none">Email</label>
+        <input class="login-input" type="email" placeholder="ornek@email.com">
+      </div>
+      <div class="login-field">
+        <label class="login-label tr-text">Şifre</label>
+        <label class="login-label en-text" style="display:none">Password</label>
+        <input class="login-input" type="password" placeholder="••••••••">
+        <a href="#" class="login-forgot tr-text">Şifremi Unuttum</a>
+        <a href="#" class="login-forgot en-text" style="display:none">Forgot Password?</a>
+      </div>
+
+      <button class="login-btn tr-text">Giriş Yap</button>
+      <button class="login-btn en-text" style="display:none">Sign In</button>
+
+      <div class="login-divider tr-text">veya</div>
+      <div class="login-divider en-text" style="display:none">or</div>
+
+      <button class="login-register-btn tr-text">Hesap Oluştur</button>
+      <button class="login-register-btn en-text" style="display:none">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ BESTSELLER PAGE ════════════ -->
+<div class="page" id="page-bestseller">
+  <div class="cat-detail">
+    <div class="cat-detail-header">
+      <div class="cat-detail-title">
+        <span class="tr-text">ÇOK SATANLAR</span>
+        <span class="en-text" style="display:none">BESTSELLERS</span>
+      </div>
+      <button class="btn-back" onclick="showHome()">
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5H18M0 5L5 1M0 5L5 9" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <span class="tr-text">Geri</span>
+        <span class="en-text" style="display:none">Back</span>
+      </button>
+    </div>
+    <div class="products-grid" id="bestseller-grid"></div>
+  </div>
+</div>
+
+<!-- ════════════ CATEGORY PAGE ════════════ -->
+<div class="page" id="page-category">
+  <div class="cat-detail">
+    <div class="cat-detail-header">
+      <div class="cat-detail-title">
+        <span id="cat-subtitle-tr" class="tr-text"></span>
+        <span id="cat-subtitle-en" class="en-text" style="display:none"></span>
+        <span id="cat-main-title"></span>
+      </div>
+      <button class="btn-back" onclick="showHome()">
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5H18M0 5L5 1M0 5L5 9" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <span class="tr-text">Geri</span>
+        <span class="en-text" style="display:none">Back</span>
+      </button>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const lang = {current: 'tr'};
+
+const categories = {
+  rings: {
+    en: 'Rings', tr: 'Yüzük',
+    products: [
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺4.850',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺2.200',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺5.400',tag:'Bestseller'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺1.850',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺6.200',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺2.600',tag:''},
+    ]
+  },
+  necklaces: {
+    en: 'Necklaces', tr: 'Kolye',
+    products: [
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺7.800',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺3.400',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺5.100',tag:'Bestseller'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺2.900',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺8.500',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺4.200',tag:''},
+    ]
+  },
+  bracelets: {
+    en: 'Bracelets', tr: 'Bileklik',
+    products: [
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺9.200',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺4.600',tag:'Bestseller'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺11.500',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺3.200',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺6.800',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺5.100',tag:''},
+    ]
+  },
+  earrings: {
+    en: 'Earrings', tr: 'Küpe',
+    products: [
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺8.400',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺3.800',tag:'Bestseller'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺5.600',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺2.100',tag:''},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺7.200',tag:'New'},
+      {nameEn:'',nameTr:'',material:'Pirinç Altın Kaplama',price:'₺12.800',tag:''},
+    ]
+  }
+};
+
+// ── LANGUAGE ──
+function setLang(l) {
+  lang.current = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.querySelectorAll('.tr-text').forEach(el => el.style.display = l === 'tr' ? (el.tagName === 'SPAN' ? 'inline' : '') : 'none');
+  document.querySelectorAll('.en-text').forEach(el => el.style.display = l === 'en' ? (el.tagName === 'SPAN' ? 'inline' : '') : 'none');
+  const activePage = document.querySelector('.page.active');
+  if (activePage && activePage.id === 'page-category') {
+    const currentCat = activePage.dataset.cat;
+    if (currentCat) renderProducts(currentCat);
+  }
+}
+
+// ── NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function showHome() { showPage('page-home'); }
+function showShop() {
+  showHome();
+  setTimeout(() => {
+    document.querySelector('.shop-section').scrollIntoView({behavior:'smooth'});
+  }, 100);
+}
+
+function openCategory(cat) {
+  const data = categories[cat];
+  const isTr = lang.current === 'tr';
+  document.getElementById('cat-main-title').textContent = isTr ? data.tr.toUpperCase() : data.en.toUpperCase();
+  document.getElementById('cat-subtitle-tr').textContent = '';
+  document.getElementById('cat-subtitle-en').textContent = '';
+  document.getElementById('page-category').dataset.cat = cat;
+  renderProducts(cat);
+  showPage('page-category');
+}
+
+function renderProducts(cat) {
+  const data = categories[cat];
+  const grid = document.getElementById('products-grid');
+  const isTr = lang.current === 'tr';
+  const bgColors = {
+    rings: ['#ede8e0','#d9cfbf'],
+    necklaces: ['#ece6dc','#d5c8b2'],
+    bracelets: ['#e8e4dc','#cfc5b0'],
+    earrings: ['#e5e0d6','#ccc2ae'],
+  };
+  const [bg1, bg2] = bgColors[cat];
+
+  grid.innerHTML = data.products.map(p => `
+    <div class="prod-card">
+      <div class="prod-img" style="background:var(--cream)">
+        <div class="prod-visual"></div>
+        ${p.tag ? `<div class="prod-tag">${p.tag}</div>` : ''}
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${isTr ? p.nameTr : p.nameEn}</div>
+        <div class="prod-material">${p.material}</div>
+        <div class="prod-price">${p.price}</div>
+        <button class="prod-add">${isTr ? 'Sepete Ekle' : 'Add to Bag'}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showLogin() { showPage('page-login'); }
+
+function showDiscover() {
+  showPage('page-discover');
+}
+
+function showBestseller() {
+  const isTr = lang.current === 'tr';
+  const allBestsellers = [];
+  Object.values(categories).forEach(cat => {
+    cat.products.forEach(p => {
+      if (p.tag === 'Bestseller') allBestsellers.push(p);
+    });
+  });
+  const grid = document.getElementById('bestseller-grid');
+  grid.innerHTML = allBestsellers.map(p => `
+    <div class="prod-card">
+      <div class="prod-img" style="background:var(--cream)">
+        <div class="prod-visual"></div>
+        <div class="prod-tag">Bestseller</div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${isTr ? p.nameTr : p.nameEn}</div>
+        <div class="prod-material">${p.material}</div>
+        <div class="prod-price">${p.price}</div>
+        <button class="prod-add">${isTr ? 'Sepete Ekle' : 'Add to Bag'}</button>
+      </div>
+    </div>
+  `).join('');
+  showPage('page-bestseller');
+}
+
+function toggleSearch() {
+  const bar = document.getElementById('search-bar');
+  const nav = document.querySelector('nav');
+  const ann = document.querySelector('.announcement');
+  const updatePos = () => {
+    bar.style.top = nav.getBoundingClientRect().bottom + 'px';
+  };
+  bar.classList.toggle('open');
+  if (bar.classList.contains('open')) {
+    updatePos();
+    window._searchScrollHandler = updatePos;
+    window.addEventListener('scroll', window._searchScrollHandler);
+    setTimeout(() => {
+      const input = bar.querySelector('.search-input:not([style*="display:none"])');
+      if (input) input.focus();
+    }, 50);
+  } else {
+    if (window._searchScrollHandler) {
+      window.removeEventListener('scroll', window._searchScrollHandler);
+    }
+  }
+}
+
+function toggleCart() {
+  // Close search if open
+  const bar = document.getElementById('search-bar');
+  if (bar.classList.contains('open')) {
+    bar.classList.remove('open');
+    if (window._searchScrollHandler) window.removeEventListener('scroll', window._searchScrollHandler);
+  }
+  document.getElementById('cart-drawer').classList.toggle('open');
+  document.getElementById('cart-overlay').classList.toggle('open');
+}
+
+function toggleShopDropdown() {
+  const dd = document.getElementById('shop-dropdown');
+  const nav = document.querySelector('nav');
+  const navBottom = nav.getBoundingClientRect().bottom;
+  dd.style.top = navBottom + 'px';
+  dd.style.bottom = '0';
+  // Width: up to end of Discover/Keşfet link
+  const discoverLinks = document.querySelectorAll('.nav-links > a');
+  let discoverEl = null;
+  discoverLinks.forEach(el => {
+    if (el.offsetParent !== null && (el.textContent.trim() === 'Keşfet' || el.textContent.trim() === 'Discover')) {
+      discoverEl = el;
+    }
+  });
+  if (discoverEl) {
+    const rect = discoverEl.getBoundingClientRect();
+    dd.style.width = rect.right + 'px';
+  } else {
+    dd.style.width = '260px';
+  }
+  dd.classList.toggle('open');
+}
+function closeDropdown() {
+  document.getElementById('shop-dropdown').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.shop-dropdown-wrap')) closeDropdown();
+});
+
+// init
+setLang('tr');
+</script>
+</body>
+</html>
